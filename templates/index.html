@@ -2,57 +2,36 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canlı Hava Durumu</title>
+    <title>Hava Durumu</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            text-align: center;
-            width: 320px;
-        }
-        input {
-            width: 80%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button:hover { background-color: #45a049; }
-        .result { margin-top: 20px; }
-        .temp { font-size: 40px; font-weight: bold; color: #333; margin: 10px 0; }
+        body { font-family: sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; width: 350px; }
+        input { width: 80%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 5px; }
+        button { padding: 10px 15px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .result { margin-top: 20px; padding: 15px; background: #e9ecef; border-radius: 5px; }
+        .temp { font-size: 32px; font-weight: bold; color: #333; }
+        .error { color: red; margin-top: 10px; }
+        .user-info { font-size: 14px; color: #666; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
     </style>
 </head>
 <body>
 
 <div class="card">
+    <div class="user-info">
+        Hoş geldin, <b>{{ kullanici }}</b>! | <a href="/logout" style="color: red; text-decoration: none;">Çıkış Yap</a>
+    </div>
+
     <h2>🌤️ Hava Durumu</h2>
+    
     <form method="POST">
         <input type="text" name="sehir" placeholder="Şehir adı (Örn: Istanbul)" required>
-        <br>
         <button type="submit">Sorgula</button>
     </form>
+
+    {% if hata %}
+    <p class="error">{{ hata }}</p>
+    {% endif %}
 
     {% if hava %}
     <div class="result">
@@ -60,10 +39,6 @@
         <div class="temp">{{ hava.sicaklik }}°C</div>
         <p>Rüzgar Hızı: <b>{{ hava.ruzgar }} km/h</b></p>
     </div>
-    {% endif %}
-
-    {% if hata %}
-    <p style="color: red; margin-top: 15px;">{{ hata }}</p>
     {% endif %}
 </div>
 

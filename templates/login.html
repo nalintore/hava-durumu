@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Giriş Yap</title>
+    <style>
+        body { font-family: sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; width: 300px; }
+        input { width: 90%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 5px; }
+        button { width: 97%; padding: 10px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px; }
+        button:hover { background: #0056b3; }
+        .error { color: red; margin-top: 10px; font-size: 14px; }
+        .link { margin-top: 15px; font-size: 13px; display: block; color: #28a745; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>🔑 Giriş Yap</h2>
+    <form method="POST">
+        <input type="text" name="kullanici_adi" placeholder="Kullanıcı Adı" required>
+        <input type="password" name="sifre" placeholder="Şifre" required>
+        <button type="submit">Giriş Yap</button>
+    </form>
+
+    {% if hata %}
+    <p class="error">{{ hata }}</p>
+    {% endif %}
+
+    <a href="/register" class="link">Hesabın yok mu? Kayıt Ol</a>
+</div>
+
+</body>
+</html>
