@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canlı Hava Durumu</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            text-align: center;
+            width: 320px;
+        }
+        input {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover { background-color: #45a049; }
+        .result { margin-top: 20px; }
+        .temp { font-size: 40px; font-weight: bold; color: #333; margin: 10px 0; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>🌤️ Hava Durumu</h2>
+    <form method="POST">
+        <input type="text" name="sehir" placeholder="Şehir adı (Örn: Istanbul)" required>
+        <br>
+        <button type="submit">Sorgula</button>
+    </form>
+
+    {% if hava %}
+    <div class="result">
+        <h3>{{ hava.sehir }}</h3>
+        <div class="temp">{{ hava.sicaklik }}°C</div>
+        <p>Rüzgar Hızı: <b>{{ hava.ruzgar }} km/h</b></p>
+    </div>
+    {% endif %}
+
+    {% if hata %}
+    <p style="color: red; margin-top: 15px;">{{ hata }}</p>
+    {% endif %}
+</div>
+
+</body>
+</html>
